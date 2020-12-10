@@ -152,124 +152,70 @@ type QBVendorInfo struct {
 	Delcount    int
 }
 
+type QBVendorInfo2 struct {
+	Name        int
+	Printas     string
+  CompanyName string
+	Firstname   string
+	Lastname    string
+  Email       string
+	Addr1       string
+	Addr2       string
+	Addr3       string
+	Addr4       string
+	Addr5       string
+	Phone1      string
+	Phone2      string
+}
+
 var WBDefaultFields = []string{
 	QB_VEND:   "VEND",
 	QB_T1099:  "N",
 	QB_HIDDEN: "N",
 }
 
-func convertQBVendorToSlice(vendor QBVendorInfo) []string {
+func convertQBVendorToSlice(vendor QBVendorInfo2) []string {
 	vslice := []string{
-		QB_VEND:        vendor.Vend,
 		QB_NAME:        fmt.Sprintf("%d", vendor.Name),
-		QB_REFNUM:      vendor.Refnum,
-		QB_TIMESTAMP:   vendor.Timestamp,
 		QB_PRINTAS:     vendor.Printas,
+    QB_COMPANYNAME: vendor.CompanyName,
+		QB_FIRSTNAME:   vendor.Firstname,
+		QB_LASTNAME:    vendor.Lastname,
+    QB_EMAIL:       vendor.Email,
 		QB_ADDR1:       vendor.Addr1,
 		QB_ADDR2:       vendor.Addr2,
 		QB_ADDR3:       vendor.Addr3,
 		QB_ADDR4:       vendor.Addr4,
 		QB_ADDR5:       vendor.Addr5,
-		QB_VTYPE:       vendor.VType,
-		QB_CONT1:       vendor.Cont1,
-		QB_CONT2:       vendor.Cont2,
 		QB_PHONE1:      vendor.Phone1,
 		QB_PHONE2:      vendor.Phone2,
-		QB_FAXNUM:      vendor.Faxnum,
-		QB_EMAIL:       vendor.Email,
-		QB_NOTE:        vendor.Note,
-		QB_TAXID:       vendor.Taxid,
-		QB_LIMIT:       vendor.Limit,
-		QB_TERMS:       vendor.Terms,
-		QB_NOTEPAD:     vendor.Notepad,
-		QB_SALUTATION:  vendor.Salutation,
-		QB_COMPANYNAME: vendor.CompanyName,
-		QB_FIRSTNAME:   vendor.Firstname,
-		QB_MIDINIT:     vendor.Midinit,
-		QB_LASTNAME:    vendor.Lastname,
-		QB_CUSTFLD1:    vendor.Custfld1,
-		QB_CUSTFLD2:    vendor.Custfld2,
-		QB_CUSTFLD3:    vendor.Custfld3,
-		QB_CUSTFLD4:    vendor.Custfld4,
-		QB_CUSTFLD5:    vendor.Custfld5,
-		QB_CUSTFLD6:    vendor.Custfld6,
-		QB_CUSTFLD7:    vendor.Custfld7,
-		QB_CUSTFLD8:    vendor.Custfld8,
-		QB_CUSTFLD9:    vendor.Custfld9,
-		QB_CUSTFLD10:   vendor.Custfld10,
-		QB_CUSTFLD11:   vendor.Custfld11,
-		QB_CUSTFLD12:   vendor.Custfld12,
-		QB_CUSTFLD13:   vendor.Custfld13,
-		QB_CUSTFLD14:   vendor.Custfld14,
-		QB_CUSTFLD15:   vendor.Custfld15,
-		QB_T1099:       vendor.T1099,
-		QB_HIDDEN:      vendor.Hidden,
-		QB_DELCOUNT:    fmt.Sprintf("%d", vendor.Delcount),
 	}
 
 	return vslice
 }
 
-func convertSliceToQBVendor(vn int, vendor []string) QBVendorInfo {
-	nv := QBVendorInfo{
-		Vend:        vendor[QB_VEND],
+func convertSliceToQBVendor(vn int, vendor []string) QBVendorInfo2 {
+	nv := QBVendorInfo2{
 		Name:        vn,
-		Refnum:      vendor[QB_REFNUM],
-		Timestamp:   vendor[QB_TIMESTAMP],
 		Printas:     vendor[QB_PRINTAS],
+    CompanyName: vendor[QB_COMPANYNAME],
+		Firstname:   vendor[QB_FIRSTNAME],
+		Lastname:    vendor[QB_LASTNAME],
+    Email:       vendor[QB_EMAIL],
 		Addr1:       vendor[QB_ADDR1],
 		Addr2:       vendor[QB_ADDR2],
 		Addr3:       vendor[QB_ADDR3],
 		Addr4:       vendor[QB_ADDR4],
 		Addr5:       vendor[QB_ADDR5],
-		VType:       vendor[QB_VTYPE],
-		Cont1:       vendor[QB_CONT1],
-		Cont2:       vendor[QB_CONT2],
 		Phone1:      vendor[QB_PHONE1],
 		Phone2:      vendor[QB_PHONE2],
-		Faxnum:      vendor[QB_FAXNUM],
-		Email:       vendor[QB_EMAIL],
-		Note:        vendor[QB_NOTE],
-		Taxid:       vendor[QB_TAXID],
-		Limit:       vendor[QB_LIMIT],
-		Terms:       vendor[QB_TERMS],
-		Notepad:     vendor[QB_NOTEPAD],
-		Salutation:  vendor[QB_SALUTATION],
-		CompanyName: vendor[QB_COMPANYNAME],
-		Firstname:   vendor[QB_FIRSTNAME],
-		Midinit:     vendor[QB_MIDINIT],
-		Lastname:    vendor[QB_LASTNAME],
-		Custfld1:    vendor[QB_CUSTFLD1],
-		Custfld2:    vendor[QB_CUSTFLD2],
-		Custfld3:    vendor[QB_CUSTFLD3],
-		Custfld4:    vendor[QB_CUSTFLD4],
-		Custfld5:    vendor[QB_CUSTFLD5],
-		Custfld6:    vendor[QB_CUSTFLD6],
-		Custfld7:    vendor[QB_CUSTFLD7],
-		Custfld8:    vendor[QB_CUSTFLD8],
-		Custfld9:    vendor[QB_CUSTFLD9],
-		Custfld10:   vendor[QB_CUSTFLD10],
-		Custfld11:   vendor[QB_CUSTFLD11],
-		Custfld12:   vendor[QB_CUSTFLD12],
-		Custfld13:   vendor[QB_CUSTFLD13],
-		Custfld14:   vendor[QB_CUSTFLD14],
-		Custfld15:   vendor[QB_CUSTFLD15],
-		T1099:       vendor[QB_T1099],
-		Hidden:      vendor[QB_HIDDEN],
 	}
-
-	dc, err := strconv.Atoi(vendor[QB_DELCOUNT])
-	if err != nil {
-		dc = 0
-	}
-
-	nv.Delcount = dc
 
 	return nv
 }
 
-func ParseQBxlsx(fn string) map[int]QBVendorInfo {
-	vendorList := make(map[int]QBVendorInfo)
+func ParseQBxlsx(fn string) map[int]QBVendorInfo2 {
+	vendorList := make(map[int]QBVendorInfo2)
 
 	qbvSlice, err := xlsx.FileToSlice(fn)
 	if err != nil {
@@ -295,13 +241,9 @@ func ParseQBxlsx(fn string) map[int]QBVendorInfo {
 	return vendorList
 }
 
-func DisplayQBVendor(vendor QBVendorInfo) {
+func DisplayQBVendor(vendor QBVendorInfo2) {
 	fmt.Printf("%d ", vendor.Name)
 	fmt.Printf("%s ", strings.Title(vendor.Firstname))
-
-	if vendor.Midinit != "" {
-		fmt.Printf("%s ", strings.Title(vendor.Midinit))
-	}
 
 	fmt.Printf("%s ", strings.Title(vendor.Lastname))
 	fmt.Printf("%s ", vendor.Email)
@@ -329,23 +271,12 @@ func DisplayQBVendor(vendor QBVendorInfo) {
 	fmt.Printf("\n")
 }
 
-func WriteVendorSpreadsheet(fn string, vendors map[int]QBVendorInfo) {
+func WriteVendorSpreadsheet(fn string, vendors map[int]QBVendorInfo2) {
 	file := xlsx.NewFile()
 	sheet, err := file.AddSheet("Sheet1")
 	if err != nil {
 		fmt.Printf(err.Error())
 		return
-	}
-
-	// Write the header line Firstname
-	frow := sheet.AddRow()
-	if frow.WriteSlice(&QBFields, -1) == -1 {
-		fmt.Printf("Failed to write row:\n")
-	}
-
-	err = file.Save(fn)
-	if err != nil {
-		fmt.Printf(err.Error())
 	}
 
 	keys := make([]int, 0, len(vendors))

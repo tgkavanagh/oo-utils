@@ -55,18 +55,18 @@ type ContactInfo struct {
 
 func convertSliceToContact(sn int, contact []string) ContactInfo {
 	nc := ContactInfo{
-		Suffix:        contact[CN_SUFFIX],
-		FirstName:     contact[CN_FIRSTNAME],
-		MiddleName:    contact[CN_MIDDLENAME],
-		LastName:      contact[CN_LASTNAME],
+		Suffix:        strings.Title(strings.ToLower(contact[CN_SUFFIX])),
+		FirstName:     strings.Title(strings.ToLower(contact[CN_FIRSTNAME])),
+		MiddleName:    strings.Title(strings.ToLower(contact[CN_MIDDLENAME])),
+		LastName:      strings.Title(strings.ToLower(contact[CN_LASTNAME])),
 		HomeTelephone: contact[CN_HOMETELEPHONE],
 		WorkTelephone: contact[CN_WORKTELEPHONE],
 		CellTelephone: contact[CN_CELL],
 		Email:         contact[CN_EMAIL],
-		Address1:      contact[CN_ADDR1],
-		Address2:      contact[CN_ADDR2],
-		City:          contact[CN_CITY],
-		State:         contact[CN_STATE],
+		Address1:      strings.Title(strings.ToLower(contact[CN_ADDR1])),
+		Address2:      strings.Title(strings.ToLower(contact[CN_ADDR2])),
+		City:          strings.Title(strings.ToLower(contact[CN_CITY])),
+		State:         strings.ToUpper(contact[CN_STATE]),
 		ZipCode:       contact[CN_ZIPCODE],
 		IsSeller:      contact[CN_ISSELLER],
 		SellerNumber:  sn,
@@ -109,33 +109,33 @@ func ParseContactList(fn string) map[int]ContactInfo {
 
 func DisplayContact(contact ContactInfo) {
 	fmt.Printf("%d ", contact.SellerNumber)
-	fmt.Printf("%s ", strings.Title(contact.FirstName))
+	fmt.Printf("%s ", contact.FirstName)
 
 	if contact.MiddleName != "" {
-		fmt.Printf("%s ", strings.Title(contact.MiddleName))
+		fmt.Printf("%s ", contact.MiddleName)
 	}
 
-	fmt.Printf("%s ", strings.Title(contact.LastName))
+	fmt.Printf("%s ", contact.LastName)
 	fmt.Printf("%s ", contact.Email)
 
 	if contact.Address1 != "" {
-		fmt.Printf("%s ", strings.Title(contact.Address1))
+		fmt.Printf("%s ", contact.Address1)
 	}
 
 	if contact.Address2 != "" {
-		fmt.Printf("%s ", strings.Title(contact.Address2))
+		fmt.Printf("%s ", contact.Address2)
 	}
 
 	if contact.City != "" {
-		fmt.Printf("%s ", strings.Title(contact.City))
+		fmt.Printf("%s ", contact.City)
 	}
 
 	if contact.State != "" {
-		fmt.Printf("%s ", strings.Title(contact.State))
+		fmt.Printf("%s ", contact.State)
 	}
 
 	if contact.ZipCode != "" {
-		fmt.Printf("%s ", strings.Title(contact.ZipCode))
+		fmt.Printf("%s ", contact.ZipCode)
 	}
 
 	fmt.Printf("\n")

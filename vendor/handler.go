@@ -60,7 +60,7 @@ func displayNewVendors(c *cli.Context) error {
   }
   sort.Ints(keys)
 
-  nvendors := make(map[int]utils.QBVendorInfo)
+  nvendors := make(map[int]utils.QBVendorInfo2)
 
   for _, k := range keys {
     // Check if the contact's seller number is in the mvendors list

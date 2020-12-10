@@ -23,26 +23,24 @@ func GetFilename(c *cli.Context, tag string) string {
 	return path + fn
 }
 
-func ConvertContactToVendor(contact ContactInfo) QBVendorInfo {
-	nv := QBVendorInfo{
-		Vend:       WBDefaultFields[QB_VEND],
+func ConvertContactToVendor(contact ContactInfo) QBVendorInfo2 {
+  fullname := fmt.Sprintf("%s %s", contact.FirstName, contact.LastName)
+	addr1 := fullname
+	addr2 := fmt.Sprintf("%s %s", contact.Address1, contact.Address2)
+	addr3 := fmt.Sprintf("%s, %s %s", contact.City, contact.State, contact.ZipCode)
+
+	nv := QBVendorInfo2{
 		Name:       contact.SellerNumber,
-		Addr1:      contact.Address1,
-		Addr2:      contact.Address2,
-		Addr3:      contact.City,
-		Addr4:      contact.State,
-		Addr5:      contact.ZipCode,
+		Printas:    fullname,
+		CompanyName: fullname,
+		Firstname:  contact.FirstName,
+		Lastname:   contact.LastName,
+		Email:      contact.Email,
+		Addr1:      addr1,
+		Addr2:      addr2,
+		Addr3:      addr3,
 		Phone1:     contact.HomeTelephone,
 		Phone2:     contact.CellTelephone,
-		Faxnum:     contact.WorkTelephone,
-		Email:      contact.Email,
-		Salutation: contact.Suffix,
-		Firstname:  contact.FirstName,
-		Midinit:    contact.MiddleName,
-		Lastname:   contact.LastName,
-		T1099:      WBDefaultFields[QB_T1099],
-		Hidden:     WBDefaultFields[QB_HIDDEN],
-		Delcount:   0,
 	}
 
 	return nv
