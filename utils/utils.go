@@ -20,6 +20,7 @@ func GetFilename(c *cli.Context, tag string) string {
 	fn := GetStringTag(c, tag)
 	path := c.GlobalString("path")
 
+
 	return path + fn
 }
 
@@ -28,6 +29,8 @@ func ConvertContactToVendor(contact ContactInfo) QBVendorInfo2 {
 	addr1 := fullname
 	addr2 := fmt.Sprintf("%s %s", contact.Address1, contact.Address2)
 	addr3 := fmt.Sprintf("%s, %s %s", contact.City, contact.State, contact.ZipCode)
+
+fmt.Printf("Full name: %v\n", fullname)
 
 	nv := QBVendorInfo2{
 		Name:       contact.SellerNumber,

@@ -61,14 +61,24 @@ func displayNewVendors(c *cli.Context) error {
   sort.Ints(keys)
 
   nvendors := make(map[int]utils.QBVendorInfo2)
+	cvendors := make(map[int]utils.QBVendorInfo2)
 
   for _, k := range keys {
     // Check if the contact's seller number is in the mvendors list
-    if _, ok := mvendors[k]; !ok {
-      nv := utils.ConvertContactToVendor(contacts[k])
+		nv := utils.ConvertContactToVendor(contacts[k])
+
+    if mv, ok := mvendors[k]; !ok {
       nvendors[k] = nv
       //utils.DisplayQBVendor(nv)
-    }
+    } else {
+			if mv != nv {
+				fmt.Println("\nOld vendor information is out of date")
+				fmt.Printf("Old: %v\n", mv)
+				fmt.Printf("New: %v\n\n", nv)
+
+				cvendors[k] = nv
+			}
+		}
   }
 
   fmt.Printf("# New Vendors: %d\n", len(nvendors))
